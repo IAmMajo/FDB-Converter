@@ -8,5 +8,9 @@
   },
   "devDependencies": {
     "vite": "^2.7.2"
+  },
+  "volta": {
+    "node": "16.13.2",
+    "npm": "8.3.1"
   }
 }

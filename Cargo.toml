@@ -8,6 +8,7 @@ edition = "2021"
 mapr = "0.8.0"
 assembly = { git = "https://github.com/LUDevNet/Assembly", rev = "1b31c494c4f48c711e67bcba23236b715c6cfd52" }
 rusqlite = "0.21.0"
+sfhash = "0.1.1"
 
 [profile.release]
 panic = "abort"

@@ -15,5 +15,8 @@
   "volta": {
     "node": "16.13.2",
     "npm": "8.3.1"
+  },
+  "dependencies": {
+    "beercss": "^2.0.0"
   }
 }

@@ -1,9 +1,0 @@
-name = "fdb-converter"
-type = "webpack"
-route = 'fdbconverter.maxoverlack.dev/*'
-account_id = '9839aabb4253ed85d80549a8f99ee832'
-zone_id = '144fd5e1be1bfd6b02f2a5e7e9645d46'
-usage_model = ''
-compatibility_flags = []
-site = { bucket = "dist", entry-point = "workers-site" }
-compatibility_date = "2022-01-17"

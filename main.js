@@ -80,6 +80,13 @@ fileElement.addEventListener("change", async () => {
   loader.classList.remove("invisible");
   fileElement.disabled = true;
   if (!module) {
+    const script = document.createElement("script");
+    script.src = "/fdb-converter.js";
+    const scriptLoad = new Promise((resolve) =>
+      script.addEventListener("load", () => resolve())
+    );
+    document.head.append(script);
+    await scriptLoad;
     module = await Module();
   }
   const input = new Uint8Array(await file.arrayBuffer());

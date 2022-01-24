@@ -34,7 +34,7 @@ pub extern "C" fn fdb_to_sqlite() {
 }
 
 /// Code adapted from
-/// https://github.com/LUDevNet/Assembly/blob/168e9f5652afbd2f88ba55bf66c96bcaabff4380/modules/fdb/examples/sqlite-to-fdb.rs#L27
+/// https://github.com/LUDevNet/Assembly/blob/69a4f8383ed3fcd919a0f1a97538e5b13909dd44/modules/fdb/examples/sqlite-to-fdb.rs#L51
 #[no_mangle]
 pub extern "C" fn sqlite_to_fdb() {
     let start = Instant::now();
@@ -56,7 +56,7 @@ pub extern "C" fn sqlite_to_fdb() {
     let tables_query = String::from("select name from sqlite_master where type='table'");
     let mut statement = conn.prepare(&tables_query).unwrap();
     let table_names = statement
-        .query_map::<String, _, _>(rusqlite::NO_PARAMS, |row| row.get(0))
+        .query_map::<String, _, _>([], |row| row.get(0))
         .unwrap();
 
     for table_name in table_names {
@@ -69,7 +69,7 @@ pub extern "C" fn sqlite_to_fdb() {
         let mut statement = conn.prepare(&select_query).unwrap();
 
         // Number of columns destination table should have
-        let column_count = statement.columns().len();
+        let column_count = statement.column_count();
 
         // Vector to store target datatypes in
         let mut target_types: Vec<ValueType> = Vec::with_capacity(column_count);
@@ -91,10 +91,10 @@ pub extern "C" fn sqlite_to_fdb() {
             .query_row::<u32, _, _>(
                 &format!(
                     "select count(distinct [{}]) as unique_count from {}",
-                    statement.columns().get(0).unwrap().name(),
+                    statement.column_name(0).unwrap(),
                     table_name
                 ),
-                rusqlite::NO_PARAMS,
+                [],
                 |row| row.get(0),
             )
             .unwrap();
@@ -118,27 +118,26 @@ pub extern "C" fn sqlite_to_fdb() {
         }
 
         // Execute query
-        let mut rows = statement.query(rusqlite::NO_PARAMS).unwrap();
+        let mut rows = statement.query([]).unwrap();
 
         // Iterate over rows
         while let Some(sqlite_row) = rows.next().unwrap() {
             let mut fields: Vec<Field> = Vec::with_capacity(column_count);
 
             // Iterate over fields
-            for index in 0..column_count {
-                let value = sqlite_row.get_raw(index);
+            for (index, ty) in target_types.iter().enumerate() {
+                // This unwrap is OK because target_types was constructed from the sqlite declaration
+                let value = sqlite_row.get_ref(index).unwrap();
                 fields.push(match value {
                     ValueRef::Null => Field::Nothing,
-                    _ => match target_types[index] {
+                    _ => match ty {
                         ValueType::Nothing => Field::Nothing,
                         ValueType::Integer => Field::Integer(value.as_i64().unwrap() as i32),
                         ValueType::Float => Field::Float(value.as_f64().unwrap() as f32),
                         ValueType::Text => Field::Text(String::from(value.as_str().unwrap())),
                         ValueType::Boolean => Field::Boolean(value.as_i64().unwrap() != 0),
                         ValueType::BigInt => Field::BigInt(value.as_i64().unwrap()),
-                        ValueType::VarChar => {
-                            Field::VarChar(String::from(value.as_str().unwrap() as &str))
-                        }
+                        ValueType::VarChar => Field::VarChar(value.as_str().unwrap().to_owned()),
                     },
                 });
             }
@@ -161,7 +160,7 @@ pub extern "C" fn sqlite_to_fdb() {
 
     let duration = start.elapsed();
     println!(
-        "Finished in {}.{:#03}s",
+        "\nFinished in {}.{:#03}s",
         duration.as_secs(),
         duration.subsec_millis()
     );

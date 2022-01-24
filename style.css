@@ -66,10 +66,6 @@ input[disabled] {
   align-items: center;
 }
 
-.link {
-  vertical-align: baseline;
-}
-
 @media (prefers-color-scheme: dark) {
   :root {
     --primary: #d2cb36;

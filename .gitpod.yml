@@ -1,0 +1,31 @@
+image:
+  file: .gitpod.Dockerfile
+ports:
+  - port: 3000
+    name: Vite
+    visibility: public
+    onOpen: open-preview
+tasks:
+  - name: Vite
+    init: |
+      cargo build --release
+      curl https://get.volta.sh | bash -s -- --skip-setup
+      volta install node
+      npm i -g vite prettier
+      npm ci
+    command: vite
+
+vscode:
+  extensions:
+    - https://github.com/rust-lang/rust-analyzer/releases/download/2022-08-29/rust-analyzer-linux-x64.vsix
+    - bungcip.better-toml
+    - ms-azuretools.vscode-docker
+    - esbenp.prettier-vscode
+    - eamodio.gitlens
+
+github:
+  prebuilds:
+    branches: true
+    pullRequestsFromForks: true
+    addBadge: true
+    addCheck: prevent-merge-on-error

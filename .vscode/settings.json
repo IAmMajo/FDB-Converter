@@ -1,3 +1,5 @@
 {
-  "redhat.telemetry.enabled": false
+  "redhat.telemetry.enabled": false,
+  "editor.rulers": [80],
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }

@@ -6,11 +6,11 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [dependencies]
 mapr = "0.8.0"
-assembly = { git = "https://github.com/LUDevNet/Assembly", rev = "69a4f8383ed3fcd919a0f1a97538e5b13909dd44" }
+assembly = { git = "https://github.com/LUDevNet/Assembly", rev = "258fc31e2c50713912f54717871f2915617b7db4" }
 rusqlite = "0.26.3"
 sfhash = "0.1.1"
 
 [profile.release]
 panic = "abort"
 lto = true
-opt-level = 'z'
+opt-level = 's'

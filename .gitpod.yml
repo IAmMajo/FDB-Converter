@@ -1,7 +1,7 @@
 image:
   file: .gitpod.Dockerfile
 ports:
-  - port: 3000
+  - port: 5173
     name: Vite
     visibility: public
     onOpen: open-preview
@@ -17,7 +17,7 @@ tasks:
 
 vscode:
   extensions:
-    - https://github.com/rust-lang/rust-analyzer/releases/download/2022-08-29/rust-analyzer-linux-x64.vsix
+    - https://github.com/rust-lang/rust-analyzer/releases/download/2022-09-05/rust-analyzer-linux-x64.vsix
     - bungcip.better-toml
     - ms-azuretools.vscode-docker
     - esbenp.prettier-vscode

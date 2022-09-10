@@ -1,5 +1,8 @@
 {
   "redhat.telemetry.enabled": false,
   "editor.rulers": [80],
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer"
+  }
 }

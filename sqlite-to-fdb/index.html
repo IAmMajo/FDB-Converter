@@ -4,29 +4,27 @@
     <meta charset="UTF-8" />
     <link rel="icon" href="/src/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FDB to SQLite | FDB Converter</title>
+    <title>SQLite to FDB | FDB Converter</title>
     <meta
       name="description"
-      content="Convert FDB files of the game LEGO Universe to SQLite files. The conversion takes place entirely client-side. Nothing is uploaded to a server."
+      content="Convert SQLite files back to FDB files. The conversion takes place entirely client-side. Nothing is uploaded to a server."
     />
     <meta name="color-scheme" content="light dark" />
   </head>
   <body class="surface on-surface-text body-large">
     <div>
-      <h1 class="display-large">FDB To SQLite</h1>
-      <p class="title-large">
-        Convert FDB files of the game LEGO Universe to SQLite files.
-      </p>
+      <h1 class="display-large">SQLite to FDB</h1>
+      <p class="title-large">Convert SQLite files back to FDB files.</p>
     </div>
     <label>
-      <h2 class="headline-small">FDB File</h2>
+      <h2 class="headline-small">SQLite File</h2>
       <div class="file-icon material-icons-outlined">upload_file</div>
-      <p>Drag and drop your FDB file or click to select your FDB file.</p>
+      <p>Drag and drop your SQLite file or click to select your SQLite file.</p>
       <input
         type="file"
-        accept=".fdb"
-        data-input-extension="fdb"
-        data-output-extension="sqlite"
+        accept=".sqlite"
+        data-input-extension="sqlite"
+        data-output-extension="fdb"
       />
       <md-ripple></md-ripple>
     </label>
@@ -48,15 +46,15 @@
     <md-navigation-bar>
       <nav>
         <a href="/">
-          <md-navigation-tab label="FDB to SQLite" active>
-            <span slot="activeIcon" class="material-icons">circle</span>
+          <md-navigation-tab label="FDB to SQLite">
+            <span slot="inactiveIcon" class="material-icons-outlined">
+              circle
+            </span>
           </md-navigation-tab>
         </a>
         <a href="/sqlite-to-fdb/">
-          <md-navigation-tab label="SQLite to FDB">
-            <span slot="inactiveIcon" class="material-icons-outlined">
-              square
-            </span>
+          <md-navigation-tab label="SQLite to FDB" active>
+            <span slot="activeIcon" class="material-icons">square</span>
           </md-navigation-tab>
         </a>
         <a href="/xml-to-fdb/">

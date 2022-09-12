@@ -34,14 +34,14 @@ fn main() {}
 pub extern "C" fn fdb_to_sqlite() {
     let start = Instant::now();
 
-    let src_file = File::open("input.fdb").unwrap();
+    let src_file = File::open("input").unwrap();
     let mmap = unsafe { Mmap::map(&src_file).unwrap() };
     let buffer: &[u8] = &mmap;
 
     println!("Copying data, this may take a few seconds...");
 
     let db = Database::new(buffer);
-    let mut conn = Connection::open("output.sqlite").unwrap();
+    let mut conn = Connection::open("output").unwrap();
 
     try_export_db(&mut conn, db).unwrap();
 
@@ -61,11 +61,10 @@ pub extern "C" fn sqlite_to_fdb() {
 
     // sqlite input
     let conn =
-        Connection::open_with_flags("input.sqlite", rusqlite::OpenFlags::SQLITE_OPEN_READ_ONLY)
-            .unwrap();
+        Connection::open_with_flags("input", rusqlite::OpenFlags::SQLITE_OPEN_READ_ONLY).unwrap();
 
     // fdb output
-    let dest_file = File::create("output.fdb").unwrap();
+    let dest_file = File::create("output").unwrap();
 
     let mut dest_out = BufWriter::new(dest_file);
     let mut dest_db = store::Database::new();
@@ -185,17 +184,17 @@ pub extern "C" fn sqlite_to_fdb() {
         duration.subsec_millis()
     );
 
-    println!("Output written to 'output.fdb'");
+    println!("Output written to 'output'");
 }
 
 /// Code adapted from
 /// https://github.com/LUDevNet/Assembly/blob/dd2a7e0e9494cc94f7cc4df814f2631d1af1f306/modules/data/examples/xmldb-to-fdb.rs#L38
 #[no_mangle]
 pub extern "C" fn xml_to_fdb() {
-    let src_file = File::open("input.xml").unwrap();
+    let src_file = File::open("input").unwrap();
     let reader = BufReader::new(src_file);
 
-    let dest_file = File::create("output.fdb").unwrap();
+    let dest_file = File::create("output").unwrap();
     let mut dest_out = BufWriter::new(dest_file);
 
     println!("Copying file, this may take a few seconds...");

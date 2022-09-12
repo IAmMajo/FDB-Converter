@@ -16,6 +16,10 @@
     "npm": "8.19.1"
   },
   "dependencies": {
-    "beercss": "^2.0.2"
+    "@fontsource/material-icons": "^4.5.4",
+    "@fontsource/material-icons-outlined": "^4.5.4",
+    "@fontsource/roboto": "^4.5.8",
+    "@loadingio/css-spinner": "^2.0.2",
+    "@material/web": "^0.1.0-alpha.0"
   }
 }

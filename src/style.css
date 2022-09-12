@@ -1,0 +1,142 @@
+html {
+  --file-icon-size: max(min(calc(100vh - 747.22px), calc(100vw - 50px)), 230px);
+  max-width: 1304px;
+  margin: auto;
+}
+
+body {
+  margin: 0 8px 80px;
+  text-align: center;
+  min-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+label {
+  position: relative;
+  border: 1px solid var(--md-sys-color-outline);
+  border-radius: 12px;
+  padding: 0 16px;
+  --md-ripple-hover-state-layer-color: var(--md-sys-color-on-surface);
+  --md-ripple-pressed-state-layer-color: var(--md-sys-color-on-surface);
+}
+
+label.surface-variant {
+  border-color: transparent;
+  --md-ripple-hover-state-layer-color: var(--md-sys-color-on-surface-variant);
+  --md-ripple-pressed-state-layer-color: var(--md-sys-color-on-surface-variant);
+}
+
+.file-icon {
+  font-size: var(--file-icon-size);
+}
+
+input {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+md-navigation-bar {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
+
+nav {
+  display: flex;
+  width: 100%;
+}
+
+nav a {
+  display: flex;
+  flex-grow: 1;
+  text-decoration: none;
+}
+
+.lds-ring {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  color: var(--md-sys-color-primary);
+  width: var(--file-icon-size);
+  height: var(--file-icon-size);
+}
+
+.lds-ring div {
+  width: calc(var(--file-icon-size) * 0.5 - 16px);
+  height: calc(var(--file-icon-size) * 0.5 - 16px);
+}
+
+.error-wrapper {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  bottom: 96px;
+  left: 8px;
+  right: 8px;
+}
+
+.error-container {
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  padding: 0 4px 0 16px;
+  text-align: left;
+}
+
+.error-container p {
+  margin-right: 24px;
+}
+
+@media (min-width: 600px) and (orientation: portrait), (min-width: 916px) {
+  html {
+    --file-icon-size: max(
+      min(calc(100vh - 490.22px), calc(100vw - 138px)),
+      230px
+    );
+  }
+
+  body {
+    margin: 0 12px 0 92px;
+    min-height: 100vh;
+  }
+
+  md-navigation-bar {
+    top: 0;
+    width: 80px;
+    --md-navigation-bar-container-height: 100%;
+  }
+
+  nav {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  nav a {
+    flex-grow: unset;
+  }
+
+  .error-wrapper {
+    left: 88px;
+  }
+}
+
+@media (min-width: 840px) and (orientation: portrait), (min-width: 916px) {
+  html {
+    --file-icon-size: max(
+      min(calc(100vh - 452.22px), calc(100vw - 178px)),
+      230px
+    );
+  }
+
+  body {
+    margin: 0 32px 0 112px;
+  }
+}

@@ -11,7 +11,7 @@ use assembly::{
         common::{expect_decl, expect_end},
         database::{
             self, expect_column_or_end_columns, expect_columns, expect_database,
-            expect_row_or_end_rows, expect_rows,
+            expect_row_or_end_rows, expect_rows, expect_table,
         },
         quick::Reader,
     },
@@ -212,7 +212,7 @@ pub extern "C" fn xml_to_fdb() {
     let db_name = expect_database(xml, buf).unwrap().unwrap();
     println!("Loading database: '{}'", db_name);
 
-    while let Some(table_name) = expect_database(xml, buf).unwrap() {
+    while let Some(table_name) = expect_table(xml, buf).unwrap() {
         println!("table '{}'", table_name);
         let mut dest_table = store::Table::new(128);
 

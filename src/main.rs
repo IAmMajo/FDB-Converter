@@ -81,6 +81,14 @@ pub extern "C" fn sqlite_to_fdb() {
     for table_name in table_names {
         let table_name = table_name.unwrap();
 
+        /*
+         * Ignore DLU's migration_history table.
+         * See https://github.com/IAmMajo/FDB-Converter/issues/1
+         */
+        if table_name == "migration_history" {
+            continue;
+        }
+
         // Query used for getting column info and the actual data
         let select_query = format!("select * from {}", &table_name);
 
